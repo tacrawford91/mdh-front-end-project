@@ -38,16 +38,15 @@ class App extends React.Component {
   showInfo = () => {
     this.setState({ showInfo: 1 });
   }
-  stateSelectAll = (selectedState) => {
-    this.setState({ selected: [...this.state.selected.filter((location) => location.state !== selectedState), ...this.state.locations.filter((location) => location.state === selectedState)] });
-  }
   stateDeSelectAll = (deSelectedState) => {
     let updated = this.state.selected.filter((location) => location.state !== deSelectedState);
     this.setState({
       selected: updated
     });
   }
-
+  stateSelectAll = (selectedState) => {
+    this.setState({ selected: [...this.state.selected.filter((location) => location.state !== selectedState), ...this.state.locations.filter((location) => location.state === selectedState)] });
+  }
   toggleLocation = (locationID) => {
     if (this.state.selected.filter((selected) => selected.id === locationID).length === 0) {
       //Display on map
@@ -59,7 +58,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <section className={styles.app}>
+      <section className={ styles.app }>
         <SearchHeader
           deSelectAll={ this.deSelectAll }
           hideInfo={ this.hideInfo }
@@ -72,7 +71,6 @@ class App extends React.Component {
           <div className='dataWrapper'>
             <CheckboxWindow
               allSelected={ this.state.allSelected }
-              customerStates={ this.state.customerStates }
               deSelectAll={ this.deSelectAll }
               locations={ this.state.locations }
               searchTerm={ this.state.searchTerm }

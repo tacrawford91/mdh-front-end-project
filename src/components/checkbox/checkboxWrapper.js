@@ -9,26 +9,8 @@ class CheckboxWrapper extends React.Component {
         super(props)
         this.state = ({
             selectAll: 0,
-            checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
+            checked: []
         })
-    }
-    allSelected = () => {
-        if (!this.props.allSelected) {
-            this.props.selectAll();
-            this.setState({
-                selectAll: 0,
-                checked: [0]
-                // checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
-            })
-        }
-        if (this.props.allSelected) {
-            this.props.deSelectAll();
-            this.setState({
-                selectAll: 1,
-                checked: [...new Set(this.props.locations.filter((location) => location.state === this.props.stateName).map(location => location.id))]
-            })
-            this.state.checked.forEach((location) => this.checkUpdater(location))
-        }
     }
     selectAllToggle = (stateName) => {
         if (this.state.selectAll) {
@@ -56,60 +38,25 @@ class CheckboxWrapper extends React.Component {
             this.props.toggleLocation(localStoreID);
         }
     }
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (this.props.allSelected !== prevProps.allSelected && this.props.allSelected) {
-    //         this.setState({
-    //             selectAll: !this.state.selectAll,
-    //             checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
-
-    //         });
-    //         this.props.selectAll();
-    //         this.render();
-    //     } else if (this.props.allSelected !== prevProps.allSelected && !this.props.allSelected) {
-    //         this.props.deSelectAll();
-    //         this.setState({
-    //             selectAll: !this.state.selectAll,
-    //             checked: [...new Set(this.props.selected.filter((location) => location.state !== this.props.stateName).map(location => location.id))]
-    //         });
-            
-    //         this.render();
-    //     } 
-
-    //     //issues - state select all then deselect all does not re-render checkboxs
-    // }
-        componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) {
         if (this.props.allSelected !== prevProps.allSelected && this.props.allSelected) {
+            this.props.selectAll();
             this.setState({
                 selectAll: 1,
                 checked: [...new Set(this.props.locations.filter((location) => location.state === this.props.stateName).map(location => location.id))]
-
             });
-            this.props.selectAll();
-            // this.render();
         } else if (this.props.allSelected !== prevProps.allSelected && !this.props.allSelected) {
-            this.props.deSelectAll();
+            this.props.deSelectAll()
             this.setState({
                 selectAll: 0,
                 checked: [0]
             });
-        } 
-        // else if (this.props.allSelected === prevProps.allSelected && !this.props.allSelected && prevState.selectAll !== this.state.selectAll && !this.state.checked ) {
-        //         this.props.deSelectAll();
-        //         this.setState({
-        //             selectAll: 0,
-        //             checked: [0]
-        //         });
-
-            // this.render();
-        // } 
-
-        //issues - state select all then deselect all does not re-render checkboxs
+        } else {
+        }
     }
 
     checkChangeHandler = (localStoreId) => {
     }
-
-
     render() {
         return (
             <div className='stateContainer'>
@@ -121,16 +68,16 @@ class CheckboxWrapper extends React.Component {
                 </div>
                 <div className='stateContent'>
                     {this.props.localLocations.map((showLocation) => {
-                        return    (
-                                <Checkbox
-                                    checkChangeHandler={ this.checkChangeHandler }
-                                    checked={ this.state.checked.includes(showLocation.id ) }
-                                    checkUpdater={ this.checkUpdater }
-                                    id={ showLocation.id }
-                                    key={ showLocation.id }
-                                    localStore={ showLocation }
-                                />
-                            )
+                    return (
+                            <Checkbox
+                                checkChangeHandler={ this.checkChangeHandler }
+                                checked={ this.state.checked.includes(showLocation.id ) }
+                                checkUpdater={ this.checkUpdater }
+                                id={ showLocation.id }
+                                key={ showLocation.id }
+                                localStore={ showLocation }
+                            />
+                        )
                     }
                 )}
                 </div>
