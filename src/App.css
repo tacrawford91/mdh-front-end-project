@@ -1,32 +1,329 @@
-.App {
+.app {
+  display: flex;
+  flex-direction: row;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.mainWrapper {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  height: 100vh;
+
+}
+.searchWrapper {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.infoShowDiv {
+  flex-basis: 100%;
+}
+
+/* SEARCH 
+    HEADER
+      STYLE */
+.searchWrapper h3 {
+  display: inline-block;
+  font-weight: 600;
+  padding-left: 12px;
+  line-height: 26px;
+}
+
+.search-input::before {
+  content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAQJJREFUKBWVkr2uQUEUhf3ET6GRaC5aFRoJKrf1BKpb8SwqovYGXkCj00k0QnRKEYkILYobvpUYmeMMyVnJl7P3mjN7Zu9zwiGv2qRFyMMSRrAFp6JPN8XzBj+wgDkUYAg7WINTYdwpDECxrRLJHeq2accdkgm8bzTvNAg2EDOGeUYI1KNO1gkuzTA1g8T7ojbn4ONQWPuHPWgeHmnzCqoe15tkSNPgPEAn68oVcOmA2XMtGK9FoE/VhOTTVNExqLCGZnxCv2pYauEC6lF0oQxX6IOvb7yX9NPEQafan+aPXDdQC18LsO6Tip5BBY6gIQaSbnMCFRCBZRcIvFkbsvCr4AFGOCxQy+JdGQAAAABJRU5ErkJggg==');
+  display: block;
+  position: absolute;
+  width: 15px;
+  z-index: 3;
+  height: 15px;
+  font-size: 20px;
+  left: 16px;
+  line-height: 32px;
+  opacity: 0.6;
+  margin-left: 86%;
+
+}
+.search-input {
+  margin-bottom: 5px;
+  padding: 0;
+  width: 23%;
+  height: 35px;
+  display: inline-block;
+  flex-basis: 95%;
+}
+.search-input > input {
+    font-size: 14px;
+    width: 100%;
+    margin-left: 12px;
+    line-height: 22px;
+    padding: 10px;
+    height: 32px;
+    position: relative;
+    border: 0;
+    box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
+}
+
+.selectDiv {
+  display: block;
+  width: 23%;
+  font-size: 12px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  text-align: center;
+  flex-basis: 100%;
+  line-height: 35px;
+}
+.selectDiv p {
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 5px;
+  width: 90px;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 5px;
+}
+.cancelBtn {
+  float: right;
+  background-color: #d4d4d4;
+  color:#9e9e9e;
+}
+.addBtn {
+  float: right;
+  background-color: #03a9ea;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.dataWrapper {
+  flex: 1.5;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 100vh;
+}
+.mapWrapper {
+  flex: 1;
+}
+/* CHECKBOX 
+    WINDOW
+      STYLE */
+.dataWrapper::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.dataWrapper::-webkit-scrollbar {
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+.dataWrapper::-webkit-scrollbar-thumb {
+	background-color: #1357e9a9;
+  border: 2px solid #1357e9a9;
+  border-radius: 25%;
+}
+
+.stateWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.stateContainer {
+  box-shadow: 0 0 7px -2px rgba(0, 0, 0, 0.3);
+  flex-basis: 100%;
+}
+.stateHeader {
+  background: whitesmoke;
+  box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  text-align: left;
+  padding-left: 12px;
+  padding-right: 6px;
+  padding-top: 0px;
+  font-family: sans-serif;
+  height: 40px;
+  
+}
+
+.stateHeader h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: sans-serif;
+  display: inline-block;
+  margin: 0px;
+  margin-top: 10px;
+}
+.stateHeader p {
+    float: right;
+    margin-top: 10px;
+    padding-right: 2%;
+    font-size: 14px;
+    text-decoration: underline;
+    color: #808080bf;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.stateContent {
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.stateContent::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.stateContent::-webkit-scrollbar {
+	width: 0px;
+	background-color: #F5F5F5;
+}
+
+.stateContent::-webkit-scrollbar-thumb {
+	background-color: #1357e9a9;
+  border: 2px solid #1357e9a9;
+  border-radius: 25%;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin: 4px 10px 0 0;
+}
+
+/*CUSTOM
+    CHECKBOX
+      STYLES */
+.stateCheckbox {
+  height: 45px;
+  padding: 5px 0px 5px 10px;
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0 4px 4px -6px grey;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.stateCheckbox h6 {
+  margin: 0;
+  padding-left: 29px;
+}
+.stateCheckbox label {
+  font-weight: 600;
+}
+
+/* Hide the browser's default checkbox */
+.stateCheckboxinput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  margin: 4px 10px 0 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 9px;
+  left: 7px;
+  height: 17px;
+  width: 17px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.stateCheckbox:hover input ~ .checkmark {
+  background-color: #fff;
+}
+
+/* When the checkbox is checked, add a blue background */
+.stateCheckbox input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.stateCheckbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.stateCheckbox .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(33deg);
+}
+
+
+
+@media screen and (min-width: 450px){
+  .dataWrapper {
+    flex: 1;
   }
-  to {
-    transform: rotate(360deg);
+  .mapWrapper {
+    flex: 1;
   }
+  .search-input {
+    flex-basis: 45%;
+  }
+  .search-input::before {
+    margin-left: 37%;
+  } 
+  .selectDiv {
+    flex-basis: 50%
+  }
+}
+
+@media screen and (min-width: 760px){
+  .stateContainer {
+    box-shadow: 0 0 7px -2px rgba(0, 0, 0, 0.3);
+    flex-basis: 50%;
+  }
+  .dataWrapper {
+    flex: 1;
+  }
+  .searchWrapper {
+    display: block
+  }
+  .mapWrapper {
+    flex: 1;
+    /* width: 50vw; */
+  }
+  .search-input::before {
+  margin-left: 20%;
+}
+  .selectDiv {
+  display: inline-block;
+  width: 23%;
+  font-size: 12px;
+  margin-left: 15px;
+  text-align: center;
+}
 }
