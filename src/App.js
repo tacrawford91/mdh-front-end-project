@@ -12,7 +12,6 @@ class App extends React.Component {
     this.state = {
       locations: LocationData.sort((a, b) => a.state.localeCompare(b.state)).map(location => ({ ...location, selected: 1 })),
       selected: [],
-      customerStates: [...new Set(LocationData.map(location => location.state))],
       searchTerm: '',
       allSelected: 0
     }
@@ -35,7 +34,6 @@ class App extends React.Component {
       allSelected: 1,
       selected: [...this.state.locations]
     })
-    this.state.customerStates.forEach((state) => this.stateSelectAll);
   }
   showInfo = () => {
     this.setState({ showInfo: 1 });
@@ -46,7 +44,6 @@ class App extends React.Component {
   stateDeSelectAll = (deSelectedState) => {
     let updated = this.state.selected.filter((location) => location.state !== deSelectedState);
     this.setState({
-      allSelected: 0,
       selected: updated
     });
   }
@@ -76,7 +73,7 @@ class App extends React.Component {
             <CheckboxWindow
               allSelected={ this.state.allSelected }
               customerStates={ this.state.customerStates }
-              deSelectAll={ this.selectAll }
+              deSelectAll={ this.deSelectAll }
               locations={ this.state.locations }
               searchTerm={ this.state.searchTerm }
               selectAll={ this.selectAll }

@@ -17,14 +17,15 @@ class CheckboxWrapper extends React.Component {
             this.props.selectAll();
             this.setState({
                 selectAll: 0,
-                checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
+                checked: [0]
+                // checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
             })
         }
         if (this.props.allSelected) {
             this.props.deSelectAll();
             this.setState({
                 selectAll: 1,
-                checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
+                checked: [...new Set(this.props.locations.filter((location) => location.state === this.props.stateName).map(location => location.id))]
             })
             this.state.checked.forEach((location) => this.checkUpdater(location))
         }
@@ -55,15 +56,54 @@ class CheckboxWrapper extends React.Component {
             this.props.toggleLocation(localStoreID);
         }
     }
-    componentDidUpdate(prevProps, prevState) {
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.props.allSelected !== prevProps.allSelected && this.props.allSelected) {
+    //         this.setState({
+    //             selectAll: !this.state.selectAll,
+    //             checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
+
+    //         });
+    //         this.props.selectAll();
+    //         this.render();
+    //     } else if (this.props.allSelected !== prevProps.allSelected && !this.props.allSelected) {
+    //         this.props.deSelectAll();
+    //         this.setState({
+    //             selectAll: !this.state.selectAll,
+    //             checked: [...new Set(this.props.selected.filter((location) => location.state !== this.props.stateName).map(location => location.id))]
+    //         });
+            
+    //         this.render();
+    //     } 
+
+    //     //issues - state select all then deselect all does not re-render checkboxs
+    // }
+        componentDidUpdate(prevProps, prevState) {
         if (this.props.allSelected !== prevProps.allSelected && this.props.allSelected) {
             this.setState({
                 selectAll: 1,
-                checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
+                checked: [...new Set(this.props.locations.filter((location) => location.state === this.props.stateName).map(location => location.id))]
 
             });
-            this.render();
-        }
+            this.props.selectAll();
+            // this.render();
+        } else if (this.props.allSelected !== prevProps.allSelected && !this.props.allSelected) {
+            this.props.deSelectAll();
+            this.setState({
+                selectAll: 0,
+                checked: [0]
+            });
+        } 
+        // else if (this.props.allSelected === prevProps.allSelected && !this.props.allSelected && prevState.selectAll !== this.state.selectAll && !this.state.checked ) {
+        //         this.props.deSelectAll();
+        //         this.setState({
+        //             selectAll: 0,
+        //             checked: [0]
+        //         });
+
+            // this.render();
+        // } 
+
+        //issues - state select all then deselect all does not re-render checkboxs
     }
 
     checkChangeHandler = (localStoreId) => {
