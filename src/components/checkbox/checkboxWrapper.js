@@ -57,13 +57,11 @@ class CheckboxWrapper extends React.Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.allSelected !== prevProps.allSelected && this.props.allSelected) {
-            console.log('hello')
             this.setState({
                 selectAll: 1,
                 checked: [...new Set(this.props.selected.filter((location) => location.state === this.props.stateName).map(location => location.id))]
 
             });
-            // this.selectAllToggle(this.props.stateName)
             this.render();
         }
     }
@@ -103,28 +101,3 @@ class CheckboxWrapper extends React.Component {
 
 
 export default CheckboxWrapper;
-
-// {
-//     return (this.props.allSelected) ?
-//         (
-//             <Checkbox
-//                 checkChangeHandler={this.checkChangeHandler}
-//                 checked={this.state.checked.includes(showLocation.id)}
-//                 checkUpdater={this.checkUpdater}
-//                 id={showLocation.id}
-//                 key={showLocation.id}
-//                 localStore={showLocation}
-//             />
-//         )
-//         :
-//         (
-//             <Checkbox
-//                 checkChangeHandler={this.checkChangeHandler}
-//                 checked={this.state.checked.includes(showLocation.id)}
-//                 checkUpdater={this.checkUpdater}
-//                 id={showLocation.id}
-//                 key={showLocation.id}
-//                 localStore={showLocation}
-//             />
-//         )
-// }

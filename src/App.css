@@ -314,7 +314,6 @@ input[type=checkbox], input[type=radio] {
   }
   .mapWrapper {
     flex: 1;
-    /* width: 50vw; */
   }
   .search-input::before {
   margin-left: 20%;

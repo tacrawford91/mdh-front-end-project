@@ -37,11 +37,10 @@ export class MapContainer extends React.Component {
                                     icon={{
                                         url: 'http://maps.google.com/mapfiles/ms/icons/grey.png',
                                         scale: 3
-                                    }}
-                                />
-                            )
-                    }
-                    )
+                                        }}
+                                    />
+                            )}
+                        )
                     }
                     {this.props.selected.map((location) => {
                         return (
@@ -54,12 +53,9 @@ export class MapContainer extends React.Component {
                                     <p>Store: {location.name}</p>
                                 </div>
                             </InfoWindow>
+                            )}
                         )
                     }
-                    )
-                    }
-
-
                 </Map>
             </div>
         );

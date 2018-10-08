@@ -1,17 +1,6 @@
 import React from 'react';
 
 class Checkbox extends React.Component {
-    // componentDidMount() {
-    //     if(this.props.allSelected) {
-    //         this.props.checkUpdater(this.props.localStore.id);
-    //     }
-    // }
-
-    // componentWillUpdate(prevProps) {
-    //     if (prevProps.allSelected !== this.props.allSelected) {
-    //         this.props.checkUpdater(this.props.localStore.id);
-    //     }
-    // }
     render() {
         return (
             <label className='stateCheckbox'>
