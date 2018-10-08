@@ -64,33 +64,33 @@ class App extends React.Component {
     return (
       <section className={styles.app}>
         <SearchHeader
-          deSelectAll={this.deSelectAll}
-          hideInfo={this.hideInfo}
-          searchHandler={this.searchHandler}
-          selected={this.state.selected}
-          selectAll={this.selectAll}
-          showInfo={this.showInfo}
+          deSelectAll={ this.deSelectAll }
+          hideInfo={ this.hideInfo }
+          searchHandler={ this.searchHandler }
+          selected={ this.state.selected }
+          selectAll={ this.selectAll }
+          showInfo={ this.showInfo }
         />
         <div className='mainWrapper'>
           <div className='dataWrapper'>
             <CheckboxWindow
-              allSelected={this.state.allSelected}
-              customerStates={this.state.customerStates}
-              deSelectAll={this.selectAll}
-              locations={this.state.locations}
-              searchTerm={this.state.searchTerm}
-              selectAll={this.selectAll}
-              selected={this.state.selected}
-              stateDeSelectAll={this.stateDeSelectAll}
-              stateSelectAll={this.stateSelectAll}
-              toggleLocation={this.toggleLocation}
+              allSelected={ this.state.allSelected }
+              customerStates={ this.state.customerStates }
+              deSelectAll={ this.selectAll }
+              locations={ this.state.locations }
+              searchTerm={ this.state.searchTerm }
+              selectAll={ this.selectAll }
+              selected={ this.state.selected }
+              stateDeSelectAll={ this.stateDeSelectAll }
+              stateSelectAll={ this.stateSelectAll }
+              toggleLocation={ this.toggleLocation }
             />
           </div>
           <div className='mapWrapper'>
             <MapContainer
-              locations={this.state.locations}
-              selected={this.state.selected}
-              showInfo={this.state.showInfo}
+              locations={ this.state.locations }
+              selected={ this.state.selected }
+              showInfo={ this.state.showInfo }
             />
           </div>
         </div>

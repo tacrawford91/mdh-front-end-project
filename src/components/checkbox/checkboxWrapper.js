@@ -68,7 +68,6 @@ class CheckboxWrapper extends React.Component {
         }
     }
 
-
     checkChangeHandler = (localStoreId) => {
     }
 
@@ -86,12 +85,12 @@ class CheckboxWrapper extends React.Component {
                     {this.props.localLocations.map((showLocation) => {
                         return    (
                                 <Checkbox
-                                    checkChangeHandler={this.checkChangeHandler}
-                                    checked={this.state.checked.includes(showLocation.id)}
-                                    checkUpdater={this.checkUpdater}
-                                    id={showLocation.id}
-                                    key={showLocation.id}
-                                    localStore={showLocation}
+                                    checkChangeHandler={ this.checkChangeHandler }
+                                    checked={ this.state.checked.includes(showLocation.id ) }
+                                    checkUpdater={ this.checkUpdater }
+                                    id={ showLocation.id }
+                                    key={ showLocation.id }
+                                    localStore={ showLocation }
                                 />
                             )
                     }
