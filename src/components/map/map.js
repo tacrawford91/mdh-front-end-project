@@ -17,7 +17,7 @@ export class MapContainer extends React.Component {
                     }}
                 >
                     {this.props.locations.map((location) => {
-                        return (this.props.selected.filter((currentPin) => location.id === currentPin.id).length === 1) ?
+                        return ( this.props._isToggled(location) )?
                             (
                                 <Marker
                                     key={location.id}
@@ -42,20 +42,24 @@ export class MapContainer extends React.Component {
                             )}
                         )
                     }
-                    {this.props.selected.map((location) => {
-                        return (
-                            <InfoWindow
-                                key={location.id}
-                                position={{ lat: location.latitude, lng: location.longitude }}
-                                visible={(!!this.props.showInfo)}>
-                                <div>
-                                    <p>Location id: {location.id}</p>
-                                    <p>Store: {location.name}</p>
-                                </div>
-                            </InfoWindow>
-                            )}
-                        )
-                    }
+                    {this.props.locations.map((location) => {
+                       return (this.props._isToggled(location))? 
+                            (
+                                <InfoWindow
+                                    key={location.id}
+                                    position={{ lat: location.latitude, lng: location.longitude }}
+                                    visible={(!!this.props.showInfo)}>
+                                    <div>
+                                        <p>Location id: {location.id}</p>
+                                        <p>Store: {location.name}</p>
+                                    </div>
+                                </InfoWindow>
+                           )
+                           :
+                            (null)
+                             }
+                            )
+                        }
                 </Map>
             </div>
         );

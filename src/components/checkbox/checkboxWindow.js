@@ -19,13 +19,11 @@ class CheckboxWindow extends React.Component {
                 {Object.keys(activeDisplay).map((locationState) => {
                     return (
                         <CheckboxWrapper
-                            allSelected={ this.props.allSelected }
                             deSelectAll={ this.props.deSelectAll }
+                            _isToggled={ this.props._isToggled }
                             key= { locationState}
-                            localLocations={ activeDisplay[locationState] }
                             locations={ this.props.locations }
                             selectAll={ this.props.selectAll }
-                            selected={ this.props.selected }
                             stateDeSelectAll={ this.props.stateDeSelectAll }
                             stateName={ locationState }
                             stateSelectAll={ this.props.stateSelectAll }

@@ -10,17 +10,34 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      locations: LocationData.sort((a, b) => a.state.localeCompare(b.state)).map(location => ({ ...location, selected: 1 })),
-      selected: [],
+      locations: LocationData.sort((a, b) => a.state.localeCompare(b.state)).map(location => ({ ...location, selected: 0 })),
       searchTerm: '',
       allSelected: 0
     }
   }
 
+  _getLocationObject = (locationID) => {
+    let locationArray = this.state.locations.filter((location) => location.id === locationID);
+    return locationArray[0];
+  }
+  _isToggled = (location) => {
+    return (location.selected === 1 || location.selected === true );
+  }
+  _updateLocation = (updatedLocation) => {
+    let updatedLocations = this.state.locations.map((location) => {
+      if (location.id === updatedLocation.id) {
+        location = updatedLocation;
+      }
+      return location;
+    })
+    this.setState({ locations: [...updatedLocations] })
+  }
+
   deSelectAll = () => {
+    let updateLocations = [...this.state.locations];
+    updateLocations.map((location) => location.selected = false);
     this.setState({
-      allSelected: 0,
-      selected: []
+      locations: [...updateLocations]
     })
   }
   hideInfo = () => {
@@ -30,31 +47,41 @@ class App extends React.Component {
     this.setState({ searchTerm: term });
   }
   selectAll = () => {
+    let updateLocations = [...this.state.locations];
+    updateLocations.map((location) => location.selected = true);
     this.setState({
-      allSelected: 1,
-      selected: [...this.state.locations]
+      locations: [...updateLocations]
     })
   }
   showInfo = () => {
     this.setState({ showInfo: 1 });
   }
   stateDeSelectAll = (deSelectedState) => {
-    let updated = this.state.selected.filter((location) => location.state !== deSelectedState);
-    this.setState({
-      selected: updated
+    let updateLocations = [...this.state.locations];
+    updateLocations.forEach((location) => {
+      if (location.state === deSelectedState) {
+        return location.selected = false;
+      }
     });
+
+    this.setState({ locations: [...updateLocations] });
   }
   stateSelectAll = (selectedState) => {
-    this.setState({ selected: [...this.state.selected.filter((location) => location.state !== selectedState), ...this.state.locations.filter((location) => location.state === selectedState)] });
+    let updateLocations = [...this.state.locations];
+    updateLocations.forEach((location)=> {
+      if (location.state === selectedState) {
+        return location.selected = true;
+      }
+    });
+
+    this.setState({locations: [...updateLocations]});
   }
+
   toggleLocation = (locationID) => {
-    if (this.state.selected.filter((selected) => selected.id === locationID).length === 0) {
-      //Display on map
-      this.setState({ selected: [...this.state.selected.filter((location) => location.id !== locationID), LocationData.find((location) => location.id === locationID)] })
-    } else {
-      //Remove from map
-      this.setState({ selected: [...this.state.selected.filter((selected) => selected.id !== locationID)] })
-    }
+    let locationObject = this._getLocationObject(locationID);
+    locationObject.selected = !locationObject.selected;
+    this._updateLocation(locationObject);
+    this.setState({ locations: [...this.state.locations] });
   }
   render() {
     return (
@@ -62,20 +89,19 @@ class App extends React.Component {
         <SearchHeader
           deSelectAll={ this.deSelectAll }
           hideInfo={ this.hideInfo }
+          locations = { this.state.locations }
           searchHandler={ this.searchHandler }
-          selected={ this.state.selected }
           selectAll={ this.selectAll }
           showInfo={ this.showInfo }
         />
         <div className='mainWrapper'>
           <div className='dataWrapper'>
             <CheckboxWindow
-              allSelected={ this.state.allSelected }
               deSelectAll={ this.deSelectAll }
+              _isToggled={ this._isToggled }
               locations={ this.state.locations }
               searchTerm={ this.state.searchTerm }
               selectAll={ this.selectAll }
-              selected={ this.state.selected }
               stateDeSelectAll={ this.stateDeSelectAll }
               stateSelectAll={ this.stateSelectAll }
               toggleLocation={ this.toggleLocation }
@@ -83,8 +109,8 @@ class App extends React.Component {
           </div>
           <div className='mapWrapper'>
             <MapContainer
+              _isToggled= { this._isToggled }
               locations={ this.state.locations }
-              selected={ this.state.selected }
               showInfo={ this.state.showInfo }
             />
           </div>

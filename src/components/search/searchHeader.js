@@ -15,7 +15,7 @@ class SearchHeader extends React.Component {
                     <br />
                     <SearchInput className="search-input" onChange={(term) => this.props.searchHandler(term)} />
                     <div className='selectDiv'>
-                        <p>Show Selected</p>({this.props.selected.length})
+                        <p>Show Selected</p>({this.props.locations.filter((location) => location.selected === true).length})
                         <p onClick={() => this.props.selectAll()}>Select All</p> / <p onClick={() => this.props.deSelectAll()}>  Deselect All</p>
                     </div>
                 </div>
